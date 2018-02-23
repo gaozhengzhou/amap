@@ -1,0 +1,140 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GaeUlwo4bGyAF8aG65LSzVbX1dvhrvGI"></script>
+	<title>马水罂煲河巡河情况位置图</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	// 地图比例
+	map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT}));        
+	// 放大缩小控件
+	map.addControl(new BMap.NavigationControl());
+	// 启用滚轮放大缩小
+	map.enableScrollWheelZoom();
+	// 定位到地图的点
+	map.centerAndZoom(new BMap.Point(111.663976,22.133154), 15);
+	//map.centerAndZoom(new BMap.Point(116.350658,39.938285), 15);
+	//添加地图类型控件
+	// map.addControl(new BMap.MapTypeControl()); 
+	
+	// 单击获取点击的经纬度
+	map.addEventListener("click",function(e){
+      console.log(e.point.lng + "," + e.point.lat);
+	});
+	
+	// 编写自定义函数, 创建文本标注
+	function addLabel(text, offsetX, offsetY, point) {
+		var opts = {
+			position: point,    // 指定文本标注所在的地理位置
+			offset: new BMap.Size(offsetX, offsetY)    //设置文本偏移量
+		}
+		var label = new BMap.Label(text, opts);  // 创建文本标注对象
+		label.setStyle({
+			 color : "red",
+			 fontSize : "12px",
+			 height : "20px",
+			 lineHeight : "20px",
+			 fontFamily:"微软雅黑"
+		});
+		map.addOverlay(label); 
+	}
+	// 编写自定义函数,创建标注
+	function addMarker(title, text, point){
+		var marker = new BMap.Marker(point);
+		map.addOverlay(marker);
+		addLabel(title, 15, -15, point);
+		var opts = {
+		  width : 200,     // 信息窗口宽度
+		  height: 100,     // 信息窗口高度
+		  title : title, // 信息窗口标题
+		  offset: new BMap.Size(0, -22)    //设置文本偏移量
+		}
+		var infoWindow = new BMap.InfoWindow(text, opts);  // 创建信息窗口对象 
+		marker.addEventListener("click", function(){          
+			map.openInfoWindow(infoWindow, point); //开启信息窗口
+		});
+	}
+	
+	addMarker("马兰白朗沙桥头", "......", new BMap.Point(111.627505,22.128969));
+	addMarker("马兰木朗桥", "......", new BMap.Point(111.630335,22.135686));
+	addMarker("马兰木朗梁基塘猪场", "......", new BMap.Point(111.63276,22.136824));
+	addMarker("车坡仔和黄皮山交界处", "......", new BMap.Point(111.642224,22.14457));
+	addMarker("黄皮山余活猪场", "......", new BMap.Point(111.644277,22.14824));
+	addMarker("水尾垌梁邦巧猪场", "......", new BMap.Point(111.656458,22.155253));
+	addMarker("黄塘桥头曾昭君猪场", "......", new BMap.Point(111.656673,22.151855));
+	addMarker("黄塘桥头", "......", new BMap.Point(111.657576,22.152236));
+	addMarker("枧头陂", "......", new BMap.Point(111.669789,22.147721));
+	addMarker("联邦金属化工有限公司排污口", "......", new BMap.Point(111.672268,22.144758));
+	addMarker("联邦金属化工有限公司", "......", new BMap.Point(111.665567,22.138381));
+	addMarker("陂湖敖湖电站", "......", new BMap.Point(111.682599,22.14126));
+	addMarker("石下选矿场", "......", new BMap.Point(111.697295,22.142532));
+	addMarker("养鹅场", "......", new BMap.Point(111.70653,22.138917));
+	addMarker("洪作现猪场", "......", new BMap.Point(111.706602,22.138431));
+	addMarker("石下元屋堤防垃圾堆放处", "......", new BMap.Point(111.706701,22.137954));
+	addMarker("马朗水闸", "......", new BMap.Point(111.709808,22.130442));
+	
+	var pois = [
+		new BMap.Point(111.627505,22.128969),
+		new BMap.Point(111.628449,22.130162),
+		new BMap.Point(111.629041,22.130191),
+		new BMap.Point(111.629679,22.130091),
+		new BMap.Point(111.629966,22.130224),
+		new BMap.Point(111.631152,22.130743),
+		new BMap.Point(111.631458,22.131497),
+		new BMap.Point(111.631781,22.132217),
+		new BMap.Point(111.630182,22.134828),
+		
+		new BMap.Point(111.630335,22.135686),
+		new BMap.Point(111.63144,22.135564),
+		new BMap.Point(111.632266,22.134727),
+		
+		new BMap.Point(111.63276,22.136824),
+		
+		new BMap.Point(111.642224,22.14457),
+		
+		new BMap.Point(111.644277,22.14824),
+		
+		new BMap.Point(111.656458,22.155253),
+		
+		new BMap.Point(111.656673,22.151855),
+		
+		new BMap.Point(111.657576,22.152236),
+		
+		new BMap.Point(111.669789,22.147721),
+		
+		new BMap.Point(111.672268,22.144758),
+		
+		new BMap.Point(111.682599,22.14126),
+		
+		new BMap.Point(111.697295,22.142532),
+		
+		new BMap.Point(111.70653,22.138917),
+		
+		new BMap.Point(111.706602,22.138431),
+		
+		new BMap.Point(111.706701,22.137954),
+		
+		new BMap.Point(111.709808,22.130442),
+		new BMap.Point(111.712997,22.125014)
+	];
+	var polyline =new BMap.Polyline(pois, {
+	   enableEditing: false,//是否启用线编辑，默认为false
+	   enableClicking: true,//是否响应点击事件，默认为true
+	   strokeWeight:'5',//折线的宽度，以像素为单位
+	   strokeOpacity: 0.7,//折线的透明度，取值范围0 - 1
+	   strokeColor:"#18a45b" //折线颜色
+	});
+	//增加折线
+	map.addOverlay(polyline);          
+	
+</script>
